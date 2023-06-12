@@ -55,7 +55,6 @@
     - name: Install Terraform Office365webdesktop
       become: true
       shell: |
-        sudo snap install terraform
         sudo snap office365webdesktop
 
 
