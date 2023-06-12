@@ -169,11 +169,4 @@
           with_items:
             - kubectx
             - kubens  
-        - name: Creating ZSH Completion  
-          file:
-            src: '/opt/kubectx/completion/{{ item }}'
-            dest: '/home/{{ ansible_user_id }}/.oh-my-zsh/completions/_{{ item }}'
-            state: link
-          with_items:
-            - kubectx.zsh
-            - kubens.zsh 
+
