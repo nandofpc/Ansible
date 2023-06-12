@@ -34,10 +34,17 @@
           - jq
           - mtr
 
-    - name: ADD Repo Terraform
-      shell: wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-      args:
-      	warn: false
+    # You can also use the 'cmd' parameter instead of free form format.
+    - name: This command will change the working directory to somedir/
+      ansible.builtin.shell:
+        cmd: wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+        chdir: /tmp
+
+    #- name: ADD Repo Terraform
+    #  become: true
+    #  shell: wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    #  args:
+    
 
      #- name: Install Terraform
      #  shell:
