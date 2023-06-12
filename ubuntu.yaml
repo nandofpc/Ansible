@@ -46,13 +46,18 @@
     #  args:
     
 
-    - name: Install Terraform
+    - name: Register Repo Terraform
       shell: |
         cd /tmp
         sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg -y
         echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
         
-      
+    - name: Register Repo Terraform
+      shell: |
+        sudo apt update
+        sudo apt install terraform
+
+
     - block: 
       - name: Install Docker Key
         become: true
