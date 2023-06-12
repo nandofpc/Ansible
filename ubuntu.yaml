@@ -35,11 +35,9 @@
           - mtr
 
     - name: ADD Repo Terraform
-      shell:
-        wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-
-        args:
-      	  warn: false
+      shell: wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+      args:
+      	warn: false
 
      - name: Install Terraform
        shell:
