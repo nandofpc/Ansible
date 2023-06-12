@@ -34,11 +34,11 @@
           - jq
           - mtr
 
-    - name: Repo Terraform
-      ansible.builtin.get_url:
-        url: https://apt.releases.hashicorp.com/gpg
-        dest: /tmp
-        mode: '0440'
+    #- name: Repo Terraform
+    #  ansible.builtin.get_url:
+    #    url: https://apt.releases.hashicorp.com/gpg
+    #    dest: /tmp
+    #    mode: '0440'
 
     #- name: ADD Repo Terraform
     #  become: true
