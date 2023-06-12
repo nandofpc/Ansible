@@ -86,7 +86,7 @@
           name: awscli
           executable: pip3
 
-      - block:
+    - block:
         - name: Install Google Key
           become: true
           apt_key: 
@@ -147,7 +147,7 @@
           - njpwerner.autodocstring
           - eamodio.gitlens
 
-      - block:
+    - block:
       - name: Installing Kubectl 1.22.0
         become: true
         get_url:    
