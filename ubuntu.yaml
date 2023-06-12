@@ -102,77 +102,78 @@
           become: true
           apt:
             name: google-chrome-stable
+
         - name: Install Google Cloud SDK Key
-        become: true
-        apt_key:
-          url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
-          state: present
-      - name: Install Google Cloud SDK Repository
-        become: true
-        apt_repository:
-          repo: 'deb [arch=amd64] https://packages.cloud.google.com/apt cloud-sdk main'
-          state: present
-          filename: google-cloud-sdk
-      - name: Install Google Cloud SDK
-        become: true
-        apt:
-          name: google-cloud-sdk
+          become: true
+          apt_key:
+            url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+            state: present
+        - name: Install Google Cloud SDK Repository
+          become: true
+          apt_repository:
+            repo: 'deb [arch=amd64] https://packages.cloud.google.com/apt cloud-sdk main'
+            state: present
+            filename: google-cloud-sdk
+        - name: Install Google Cloud SDK
+          become: true
+          apt:
+            name: google-cloud-sdk
 
           
     - block:
-      - name: Install Microsoft Key
-        become: true
-        apt_key:
-          url: 'https://packages.microsoft.com/keys/microsoft.asc'
-          state: present
-      - name: Install VSCode Repository
-        become: true
-        apt_repository:
-          repo: 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main'
-          state: present
-          filename: vscode
-      - name: Install Visual Studio Code
-        become: true
-        apt:
-          name: code
-      - name: Install Virtual Studio Code Extensions
-        shell:
-          cmd: code --install-extension '{{ item }}' 
-        loop: 
-          - ms-python.python
-          - ms-azuretools.vscode-docker
-          - bbenoist.vagrant
-          - hashicorp.terraform
-          - gruntfuggly.todo-tree
-          - njpwerner.autodocstring
-          - eamodio.gitlens
+        - name: Install Microsoft Key
+          become: true
+          apt_key:
+            url: 'https://packages.microsoft.com/keys/microsoft.asc'
+            state: present
+        - name: Install VSCode Repository
+          become: true
+          apt_repository:
+            repo: 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main'
+            state: present
+            filename: vscode
+        - name: Install Visual Studio Code
+          become: true
+          apt:
+            name: code
+        - name: Install Virtual Studio Code Extensions
+          shell:
+            cmd: code --install-extension '{{ item }}' 
+          loop: 
+            - ms-python.python
+            - ms-azuretools.vscode-docker
+            - bbenoist.vagrant
+            - hashicorp.terraform
+            - gruntfuggly.todo-tree
+            - njpwerner.autodocstring
+            - eamodio.gitlens
 
     - block:
-      - name: Installing Kubectl 1.22.0
-        become: true
-        get_url:    
-          url: 'https://dl.k8s.io/release/v1.22.0/bin/linux/amd64/kubectl'
-          dest: /usr/local/bin/kubectl
-          mode: 755
-      - name: Downloading Kubectx and Kubens 
-        become: true
-        git:
-          repo: 'https://github.com/ahmetb/kubectx'
-          dest: /opt/kubectx 
-      - name: Creating Symlink to kubectx and kubens 
-        become: true
-        file:
-          src: '/opt/kubectx/{{ item }}'
-          dest: '/usr/local/bin/{{ item }}'
-          state: link
-        with_items:
-          - kubectx
-          - kubens  
-      - name: Creating ZSH Completion  
-        file:
-          src: '/opt/kubectx/completion/{{ item }}'
-          dest: '/home/{{ ansible_user_id }}/.oh-my-zsh/completions/_{{ item }}'
-          state: link
-        with_items:
-          - kubectx.zsh
-          - kubens.zsh 
+        - name: Installing Kubectl 1.22.0
+          become: true
+          get_url:    
+            url: 'https://dl.k8s.io/release/v1.22.0/bin/linux/amd64/kubectl'
+            dest: /usr/local/bin/kubectl
+            mode: 755
+        - name: Downloading Kubectx and Kubens 
+          become: true
+          git:
+            repo: 'https://github.com/ahmetb/kubectx'
+            dest: /opt/kubectx 
+        - name: Creating Symlink to kubectx and kubens 
+          become: true
+          file:
+            src: '/opt/kubectx/{{ item }}'
+            dest: '/usr/local/bin/{{ item }}'
+            state: link
+          with_items:
+            - kubectx
+            - kubens  
+        - name: Creating ZSH Completion  
+          file:
+            src: '/opt/kubectx/completion/{{ item }}'
+            dest: '/home/{{ ansible_user_id }}/.oh-my-zsh/completions/_{{ item }}'
+            state: link
+          with_items:
+            - kubectx.zsh
+            - kubens.zsh 
