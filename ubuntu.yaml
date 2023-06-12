@@ -33,7 +33,7 @@
           - krita
           - jq
           - mtr
-          - terraform
+
       
       
     - block: 
