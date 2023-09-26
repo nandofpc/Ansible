@@ -1,4 +1,4 @@
-#Test commit for new branch
+#Test commit for new branch stg
 ---
 - name: Preparing Workstation
   hosts: localhost
